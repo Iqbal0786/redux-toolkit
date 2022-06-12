@@ -20,7 +20,7 @@ export default function App() {
 
       <button onClick={()=>{
              dispatch(add())
-      }}>Add</button> <span>{count} </span>
+      }}>Add</button> <span id="count">{count} </span>
       <button
       onClick={()=>{
          if(count>0){
