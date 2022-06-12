@@ -2,3 +2,23 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+#parent{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-gap: 20px;
+  padding: 40px;
+}
+#parent > div{
+  width: 200px;
+  height: 200px;
+margin-bottom: 10px;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+padding: 10px;
+
+}
+#title{
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  margin-top: 20px;
+}
