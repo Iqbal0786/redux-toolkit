@@ -3,11 +3,15 @@ import "./styles.css";
 import {add,minus} from "./features/counterSlice"
 import { useEffect } from "react";
 import { fetchUser } from "./features/userSlice";
+import { addFevorate, deleteById } from "./features/fevorateSlice";
+import { store } from "./app/store";
 
 export default function App() {
   const dispatch=useDispatch()
   const  {count} = useSelector((store)=>store.counter)
-  const data = useSelector((store)=>store.user.data)
+  const data = useSelector((store)=>store.user)
+  const fevorate= useSelector(store=>store.fevorateReducer);
+  console.log('fevorate',fevorate)
   console.log(data)
   useEffect(()=>{
     dispatch(fetchUser())
@@ -24,7 +28,7 @@ export default function App() {
       <button
       onClick={()=>{
          if(count>0){
-          dispatch(minus())
+          dispatch(deleteById(1))
          }
      
  }}>Minus</button>
@@ -34,9 +38,11 @@ export default function App() {
 
           <div id="parent">
           {
-           data.map((item)=>{
+           data.data?.map((item)=>{
               return (
-                <div key={item.id}>
+                <div key={item.id} onClick={()=>{
+                   dispatch(addFevorate(item))
+                }}>
                 <h5>Name : {item.name}</h5>
                 <h5>Email Id : {item.email}</h5>
                 <h5>Website : {item.website}</h5>

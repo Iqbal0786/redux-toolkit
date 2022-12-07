@@ -4,15 +4,13 @@ import axios from "axios"
 const initialState={
     loading:false,
     data:[],
-    error:false
+    error:''
 
 }
 export const fetchUser=createAsyncThunk("user/fetchUser" ,()=>{
     return  axios.get("https://jsonplaceholder.typicode.com/users").then((res)=>{
         // console.log(res.data)
         return res.data
-    }).catch((err)=>{
-        console.log(err.message)
     })
 })
 
@@ -24,12 +22,13 @@ const userSlice= createSlice({
        builder.addCase(fetchUser.fulfilled, (state ,action)=>{
             state.loading=false
             state.data=action.payload
-            state.error=false
+            state.error=''
        })
-       builder.addCase(fetchUser.rejected, (state)=>{
+       builder.addCase(fetchUser.rejected, (state,action)=>{
            state.loading=false
            state.data=[]
-           state.error=true
+           state.error=action.error?.message
+          
        })
     }
 })
